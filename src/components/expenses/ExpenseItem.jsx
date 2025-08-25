@@ -3,15 +3,28 @@ import './ExpenseItem.css';
 import ExpenseDate from './ExpenseDate.jsx';
 
 const ExpenseItem = ({expense}) => {
-
   // expense는 props에서 가져와서 디스트럭쳐링
-  
-  // expense를 디스트럭쳐링
+
+  // 상태변수를 사용하는 useState 훅
+  /*
+    useState 훅의 리턴값은 배열이며
+    첫번째 요소는 관리할 상태값의 초기값
+    두번째 요소는 해당 상태값을 변경할 때 사용하는 setter 함수
+  */
   const {title, date, price} = expense;
+
+  const x = React.useState(title);
+  console.log('x[0] :', x[0]);
+
+  // 원화 표기법으로 변환
+  const formatPrice = new Intl.NumberFormat('ko-KR').format(price);
 
   // 이벤트 핸들러
   const clickHandler = e => {
-    alert('click!!');
+    console.log(`변경 전: ${x[0]}`);
+    // title = "짜장면";
+    x[1]("짜장면");
+    console.log(`변경 후: ${x[0]}`);
   };
 
   return (
@@ -20,12 +33,11 @@ const ExpenseItem = ({expense}) => {
       <ExpenseDate expenseDate={date} />
 
       <div className='expense-item__description'>
-        <h2>{title}</h2>
-        <div className='expense-item__price'>{price}원</div>
+        <h2>{x[0]}</h2>
+        <div className='expense-item__price'>{formatPrice}원</div>
       </div>
 
       <button id='btn1' onClick={clickHandler}>버튼1</button>
-      <button id='btn1' onDoubleClick={e => alert('더블클릭!')}>버튼2</button>
     </div>
   );
 };
