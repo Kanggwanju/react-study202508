@@ -2,7 +2,12 @@ import React from 'react';
 import './ExpenseItem.css';
 import ExpenseDate from './ExpenseDate.jsx';
 
-const ExpenseItem = ({title, price, date}) => {
+const ExpenseItem = ({expense}) => {
+
+  // expense는 props에서 가져와서 디스트럭쳐링
+  
+  // expense를 디스트럭쳐링
+  const {title, date, price} = expense;
 
   // console.log(props);
   // console.log(props['title']);
