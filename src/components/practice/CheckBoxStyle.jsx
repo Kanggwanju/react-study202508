@@ -9,13 +9,21 @@ const CheckBoxStyle = () => {
     3. label의 클래스를 유동적으로 변경해야함.
   */
 
+  const [status, setStatus] = useState(false);
+  console.log(status);
+  const handleChange = (e) => {
+    setStatus(e.target.checked);
+  };
+
   return (
     <div className='checkbox-container'>
       <input
         type='checkbox'
         id='styled-checkbox'
+        checked={status}        // 컨트롤드 컴포넌트
+        onChange={handleChange} // change 이벤트
       />
-      <label className='unchecked' htmlFor='styled-checkbox'>Check me!</label>
+      <label className={status ? 'checked' : 'unchecked'} htmlFor='styled-checkbox'>Check me!</label>
     </div>
   );
 };
