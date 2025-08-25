@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ExpenseItem.css';
 import ExpenseDate from './ExpenseDate.jsx';
 
@@ -13,28 +13,27 @@ const ExpenseItem = ({expense}) => {
   */
   const {title, date, price} = expense;
 
-  const x = React.useState(title);
-  console.log('x[0] :', x[0]);
+  const [itemTitle, setItemTitle] = useState(title);
+  console.log(`변경 후: ${itemTitle}`);
 
   // 원화 표기법으로 변환
   const formatPrice = new Intl.NumberFormat('ko-KR').format(price);
 
   // 이벤트 핸들러
   const clickHandler = e => {
-    console.log(`변경 전: ${x[0]}`);
+    console.log(`변경 전: ${itemTitle}`);
     // title = "짜장면";
-    x[1]("짜장면");
-    console.log(`변경 후: ${x[0]}`);
+    setItemTitle("짜장면");
   };
 
   return (
-    <div className='expense-item'>
+    <div className="expense-item">
 
       <ExpenseDate expenseDate={date} />
 
-      <div className='expense-item__description'>
-        <h2>{x[0]}</h2>
-        <div className='expense-item__price'>{formatPrice}원</div>
+      <div className="expense-item__description">
+        <h2>{itemTitle}</h2>
+        <div className="expense-item__price">{formatPrice}원</div>
       </div>
 
       <button id='btn1' onClick={clickHandler}>버튼1</button>
