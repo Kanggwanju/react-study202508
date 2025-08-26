@@ -17,10 +17,21 @@ const App = () => {
     },
   ]);
 
+  const onSave = (data) => {
+    setGoals(prev => {
+      const idSlice = +prev[prev.length - 1].id.slice(1) + 1;
+      // console.log('g' + idSlice);
+      return [...prev, {
+        id: 'g' + idSlice,
+        text: data
+      }];
+    });
+  }
+
   return (
     <div>
       <section id='goal-form'>
-        <CourseInput />
+        <CourseInput onSave={onSave}/>
       </section>
       <section id='goals'>
         <CourseList goals={goals}/>
