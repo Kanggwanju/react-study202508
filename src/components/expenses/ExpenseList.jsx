@@ -40,7 +40,7 @@ const ExpenseList = ({ expenses: expenseList }) => {
   return (
     <Card className='expenses'>
       <ExpenseFilter onChangeFilter={onFilterChange} />
-      <ExpenseChart />
+      <ExpenseChart expenses={filteredExpenses} />
       {
         filteredExpenses.length > 0
         ? filteredExpenses
