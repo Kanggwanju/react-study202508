@@ -12,13 +12,18 @@ const App = () => {
     {
       title: '호두정과',
       price: 50000,
-      date: new Date(2025, 8, 21)
+      date: new Date(2023, 8, 21)
     },
     {
       title: '리팩토링',
       price: 30000,
-      date: new Date(2025, 4, 2)
+      date: new Date(2022, 4, 2)
     },
+    {
+      title: '에어컨',
+      price: 200000,
+      date: new Date(2024, 5, 22)
+    }
   ];
 
   // 상향식 데이터 전달을 위해 하위컴포넌트에게 함수 하나를 내려줌

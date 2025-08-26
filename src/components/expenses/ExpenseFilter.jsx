@@ -4,7 +4,7 @@ import './ExpenseFilter.css';
 const ExpenseFilter = ({ onChangeFilter }) => {
 
   const changeYearHandler = e => {
-    onChangeFilter(+e.target.value);
+    onChangeFilter(e.target.value);
   };
 
   return (
