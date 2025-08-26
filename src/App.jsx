@@ -19,14 +19,18 @@ const App = () => {
 
   const onSave = (data) => {
     setGoals(prev => {
-      const idSlice = +prev[prev.length - 1].id.slice(1) + 1;
+      const id = Math.random().toString();
       // console.log('g' + idSlice);
       return [...prev, {
-        id: 'g' + idSlice,
+        id: id,
         text: data
       }];
     });
   }
+
+  const onDelete = (targetId) => {
+    setGoals(prev => prev.filter(goal => goal.id !== targetId));
+  };
 
   return (
     <div>
@@ -34,7 +38,7 @@ const App = () => {
         <CourseInput onSave={onSave}/>
       </section>
       <section id='goals'>
-        <CourseList goals={goals}/>
+        <CourseList goals={goals} onDelete={onDelete}/>
       </section>
     </div>
   );
