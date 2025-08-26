@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './ExpenseForm.css';
 
-const ExpenseForm = () => {
+const ExpenseForm = ({ onAdd }) => {
 
   // 입력값을 상태관리
   // const [title, setTitle] = useState('');
@@ -33,6 +33,9 @@ const ExpenseForm = () => {
     // const payload = { title, price, date };
 
     console.log(userInput);
+
+    // 상위컴포넌트(App)이 내려준 onAddExpense라는 함수를 onAdd로 내려받음
+    onAdd(userInput);
 
     // 입력창 초기화
     /*

@@ -21,9 +21,18 @@ const App = () => {
     },
   ];
 
+  // 상향식 데이터 전달을 위해 하위컴포넌트에게 함수 하나를 내려줌
+  const onAddExpense = (userInput) => {
+    console.log('상향식 데이터 전달용 함수');
+    console.log('끌어올려진 데이터: ', userInput);
+
+    expenseList.push(userInput);
+    console.log(expenseList);
+  };
+
   return (
     <>
-      <NewExpense />
+      <NewExpense onSave={onAddExpense}/>
       <ExpenseList expenses={expenseList} />
     </>
   );
