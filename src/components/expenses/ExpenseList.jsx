@@ -12,14 +12,14 @@ const ExpenseList = ({ expenses: expenseList }) => {
    */
 
 
-  const onAddFilter = (year) => {
-    console.log('gggg');
-    console.log(year);
+  const onFilterChange = (filteredYear) => {
+    console.log(`선택된 연도: ${filteredYear}`);
+
   };
 
   return (
     <Card className='expenses'>
-      <ExpenseFilter onSave={onAddFilter}/>
+      <ExpenseFilter onChangeFilter={onFilterChange}/>
       <ExpenseItem expense={expenseList[0]}/>
       <ExpenseItem expense={expenseList[1]}/>
       <ExpenseItem expense={expenseList[2]}/>
