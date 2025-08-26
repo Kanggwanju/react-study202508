@@ -23,7 +23,7 @@ const App = () => {
         <CourseInput />
       </section>
       <section id='goals'>
-        <CourseList />
+        <CourseList goals={goals}/>
       </section>
     </div>
   );
