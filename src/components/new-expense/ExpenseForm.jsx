@@ -47,29 +47,26 @@ const ExpenseForm = () => {
 
   };
 
+  // 제목 입력 이벤트
   const titleChangeHandler = e => {
     /*
       리액트는 기존객체에서 프로퍼티 값만을 바꾸면 상태변경을 감지하지 못함
      */
-    const newUserInput = {
-      ...userInput,
+    setUserInput(prevUserInput => ({
+      ...prevUserInput,
       title: e.target.value,
-    };
-
-    setUserInput(newUserInput);
+    }));
   };
 
+  const priceChangeHandler = e => setUserInput(prev => ({
+    ...prev,
+    price: +e.target.value,
+  }));
 
-  const priceChangeHandler = e => setUserInput({
-    ...userInput,
-    price: +e.target.value
-  });
-
-
-  const dateChangeHandler = e => setUserInput({
-    ...userInput,
-    date: e.target.value
-  });
+  const dateChangeHandler = e => setUserInput(prev => ({
+    ...prev,
+    date: e.target.value,
+  }));
 
 
   return (

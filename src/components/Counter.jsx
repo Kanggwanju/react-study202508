@@ -3,7 +3,10 @@ import React, {useState} from 'react';
 const Counter = () => {
   let [count, setCount] = useState(10);
 
-  const increaseHandler = () => setCount(count + 1);
+  const increaseHandler = () => {
+    setCount(prev => prev + 1);
+    setCount(prev => prev + 1);
+  }
   const decreaseHandler = () => setCount(count - 1);
 
   return (
