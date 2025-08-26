@@ -10,9 +10,8 @@ const CheckBoxStyle = () => {
   */
 
   const [status, setStatus] = useState(false);
-  console.log(status);
   const handleChange = (e) => {
-    setStatus(e.target.checked);
+    setStatus(!status);
   };
 
   return (
@@ -20,7 +19,6 @@ const CheckBoxStyle = () => {
       <input
         type='checkbox'
         id='styled-checkbox'
-        checked={status}        // 컨트롤드 컴포넌트
         onChange={handleChange} // change 이벤트
       />
       <label className={status ? 'checked' : 'unchecked'} htmlFor='styled-checkbox'>Check me!</label>
