@@ -10,7 +10,7 @@ const CourseItem = ({ goal, onDelete }) => {
     onDelete(goal.id);
   };
 
-  return <li className={goalItem} onClick={handleClick}>${goal.text}</li>;
+  return <li className={goalItem} onClick={handleClick}>{goal.text}</li>;
 };
 
 export default CourseItem;

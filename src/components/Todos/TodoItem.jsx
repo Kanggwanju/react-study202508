@@ -3,7 +3,7 @@ import { MdDelete, MdDone } from 'react-icons/md';
 
 import styles from './scss/TodoItem.module.scss';
 
-const TodoItem = () => {
+const TodoItem = ({ todo }) => {
 
   const { text, remove, 'todo-list-item': itemStyle, 'check-circle': checkCircle } = styles;
 
@@ -12,7 +12,7 @@ const TodoItem = () => {
       <div className={checkCircle}>
         <MdDone />
       </div>
-      <span className={text}>할 일 어쩌구~~</span>
+      <span className={text}>{todo.text}</span>
       <div className={remove}>
         <MdDelete />
       </div>
