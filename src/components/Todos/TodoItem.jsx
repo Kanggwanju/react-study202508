@@ -3,23 +3,29 @@ import { MdDelete, MdDone } from 'react-icons/md';
 
 import styles from './scss/TodoItem.module.scss';
 
-const TodoItem = ({ todo, onDelete }) => {
+const TodoItem = ({ todo, onDelete, onCheck }) => {
 
   const { text, remove, 'todo-list-item': itemStyle, 'check-circle': checkCircle } = styles;
 
-  const clickHandler = (e) => {
+  const deleteClickHandler = e => {
     onDelete(todo.id);
+  };
+
+  const checkClickHandler = e => {
+    onCheck(todo.id);
   };
 
   return (
     <li className={itemStyle}>
-      <div className={checkCircle}>
-        <MdDone />
+      <div className={checkCircle} onClick={checkClickHandler}>
+        {
+          todo.isChecked ? <MdDone /> : ''
+        }
       </div>
-      <span className={text}>{todo.text}</span>
+      <span className={`${text} ${todo.isChecked === true ? styles.finish : ''}`}>{todo.text}</span>
       <div
         className={remove}
-        onClick={clickHandler}
+        onClick={deleteClickHandler}
       >
         <MdDelete />
       </div>

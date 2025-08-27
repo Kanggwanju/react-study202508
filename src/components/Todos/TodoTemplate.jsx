@@ -37,11 +37,34 @@ const TodoTemplate = () => {
   const onDelete = (targetId) => {
     setTodos(prev => prev.filter(todo => todo.id !== targetId));
   };
+  
+  // 할 일 체크 함수
+  const onCheck = (targetId) => {
+    setTodos(prev =>
+      prev.map(todo =>
+        todo.id === targetId ? { ...todo, isChecked: !todo.isChecked } : todo
+      )
+    );
 
+    /*const copyTodos = [...todos];
+    let index = -1;
+    for (let i = 0; i < copyTodos.length; i++) {
+      if (copyTodos[i].id === targetId) {
+        index = i;
+        copyTodos[i].isChecked = !copyTodos[i].isChecked;
+        break;
+      }
+    }
+
+    if (index !== -1) {
+      setTodos(copyTodos);
+    }*/
+  }
+  
   return (
     <div className={styles.TodoTemplate}>
       <TodoHeader/>
-      <TodoMain todos={todos} onDelete={onDelete}/>
+      <TodoMain todos={todos} onDelete={onDelete} onCheck={onCheck}/>
       <TodoInput onAdd={onSave}/>
     </div>
   );
