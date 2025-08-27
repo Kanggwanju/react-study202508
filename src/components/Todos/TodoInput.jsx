@@ -32,7 +32,12 @@ const TodoInput = ({ onAdd }) => {
   return (
     <>
       <div className={wrapper}>
-        <form className={insertForm} onSubmit={submitHandler}>
+        <form className={insertForm}
+              onSubmit={submitHandler}
+              style={{
+                display: isClicked === false ? 'none' : 'flex'
+              }}
+        >
           <input
             type='text'
             placeholder='할 일을 입력 후, 엔터를 누르세요!'
@@ -43,7 +48,7 @@ const TodoInput = ({ onAdd }) => {
       </div>
       <button
         // 동적 클래스 조작
-        className={`${insertBtn} ${isClicked === true ? openStyle : ''}`}
+        className={`${insertBtn} ${isClicked === false ? '' : openStyle}`}
         onClick={clickHandler}
       >
         <MdAdd />
