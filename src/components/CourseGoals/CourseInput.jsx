@@ -1,8 +1,11 @@
 import React, {useState} from 'react';
-import './CourseInput.css';
+import styles from './CourseInput.module.css';
 import Button from '../ui/Button';
 
 const CourseInput = ({ onSave }) => {
+
+  // console.log('styles: ', styles);
+  const {'form-control': formControl, invalid} = styles;
 
   // 목표인풋에 입력한 값 상태관리
   const [enteredText, setEnteredText] = useState('');
@@ -38,7 +41,7 @@ const CourseInput = ({ onSave }) => {
   };
   return (
     <form onSubmit={submitHandler}>
-      <div className={`form-control ${isValid === false ? 'invalid' : ''}`}>
+      <div className={`${formControl} ${isValid === false ? invalid : ''}`}>
         <label
           // style={{ color: isValid !== false ? 'black' : 'red' }}
         >나의 목표</label>

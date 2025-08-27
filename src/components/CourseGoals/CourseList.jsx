@@ -1,11 +1,13 @@
 import React from 'react';
-import './CourseList.css';
+import styles from './CourseList.module.css';
 import CourseItem from './CourseItem';
 
 const CourseList = ({ goals: goalList, onDelete }) => {
 
+  // console.log('styles: ', styles);
+
   return (
-    <ul className='goal-list'>
+    <ul className={styles["goal-list"]}>
       {
         goalList.map(g => <CourseItem key={g.id} goal={g} onDelete={onDelete} />)
       }
