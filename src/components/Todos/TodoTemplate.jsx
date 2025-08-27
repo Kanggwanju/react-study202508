@@ -20,6 +20,7 @@ const TodoTemplate = () => {
     }
   ]);
 
+  // 할 일 데이터 추가 함수
   const onSave = (text) => {
     // console.log(text);
     return setTodos(prev => [
@@ -32,10 +33,15 @@ const TodoTemplate = () => {
     ])
   };
 
+  // 할 일 데이터 삭제 함수
+  const onDelete = (targetId) => {
+    setTodos(prev => prev.filter(todo => todo.id !== targetId));
+  };
+
   return (
     <div className={styles.TodoTemplate}>
       <TodoHeader/>
-      <TodoMain todos={todos}/>
+      <TodoMain todos={todos} onDelete={onDelete}/>
       <TodoInput onAdd={onSave}/>
     </div>
   );
