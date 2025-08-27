@@ -4,35 +4,28 @@ import Button from '../ui/Button';
 
 const CourseInput = ({ onSave }) => {
 
-  const [goalInput, setGoalInput] = useState('');
-  
-  // 추가 버튼 클릭 이벤트
-  const addGoal = (e) => {
+  // 목표인풋에 입력한 값 상태관리
+  const [enteredText, setEnteredText] = useState('');
+
+  const submitHandler = e => {
     e.preventDefault();
+    // console.log(`입력값: ${enteredText}`);
+    onSave(enteredText);
 
-    // 상위컴포넌트(App)이 내려준 함수 onSave 내려받음
-    onSave(goalInput);
-
-    // 입력값 초기화
-    setGoalInput('');
-  };
-  
-  // 목표 입력 이벤트
-  const goalChangeHandler = e => {
-    setGoalInput(e.target.value);
+    setEnteredText('');
   };
 
   return (
-    <form>
+    <form onSubmit={submitHandler}>
       <div className='form-control'>
         <label>나의 목표</label>
         <input
           type='text'
-          onInput={goalChangeHandler}
-          value={goalInput}
+          onInput={e => setEnteredText(e.target.value)}
+          value={enteredText}
         />
       </div>
-      <Button type='submit' onClick={addGoal}>목표 추가하기</Button>
+      <Button type='submit'>목표 추가하기</Button>
     </form>
   );
 };
