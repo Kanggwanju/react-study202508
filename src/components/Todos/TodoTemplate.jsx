@@ -63,7 +63,7 @@ const TodoTemplate = () => {
   
   return (
     <div className={styles.TodoTemplate}>
-      <TodoHeader/>
+      <TodoHeader todos={todos}/>
       <TodoMain todos={todos} onDelete={onDelete} onCheck={onCheck}/>
       <TodoInput onAdd={onSave}/>
     </div>
