@@ -20,11 +20,23 @@ const TodoTemplate = () => {
     }
   ]);
 
+  const onSave = (text) => {
+    // console.log(text);
+    return setTodos(prev => [
+      ...prev,
+      {
+        id: Math.random().toString(),
+        text: text,
+        isChecked: false
+      }
+    ])
+  };
+
   return (
     <div className={styles.TodoTemplate}>
-      <TodoHeader />
+      <TodoHeader/>
       <TodoMain todos={todos}/>
-      <TodoInput />
+      <TodoInput onAdd={onSave}/>
     </div>
   );
 };
