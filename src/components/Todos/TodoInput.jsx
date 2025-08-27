@@ -32,19 +32,19 @@ const TodoInput = ({ onAdd }) => {
   return (
     <>
       <div className={wrapper}>
-        <form className={insertForm}
+        {
+          isClicked === false ? '' :
+          <form className={insertForm}
               onSubmit={submitHandler}
-              style={{
-                display: isClicked === false ? 'none' : 'flex'
-              }}
-        >
-          <input
-            type='text'
-            placeholder='할 일을 입력 후, 엔터를 누르세요!'
-            onInput={e => setInputText(e.target.value)}
-            value={inputText}
-          />
-        </form>
+          >
+            <input
+              type='text'
+              placeholder='할 일을 입력 후, 엔터를 누르세요!'
+              onInput={e => setInputText(e.target.value)}
+              value={inputText}
+            />
+          </form>
+        }
       </div>
       <button
         // 동적 클래스 조작

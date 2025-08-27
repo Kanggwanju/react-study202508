@@ -17,9 +17,9 @@ const TodoItem = ({ todo, onDelete, onCheck }) => {
 
   return (
     <li className={itemStyle}>
-      <div className={checkCircle} onClick={checkClickHandler}>
+      <div className={`${checkCircle} ${todo.isChecked === true ? styles.active : ''}`} onClick={checkClickHandler}>
         {
-          todo.isChecked ? <MdDone /> : ''
+          todo.isChecked === true ? <MdDone /> : ''
         }
       </div>
       <span className={`${text} ${todo.isChecked === true ? styles.finish : ''}`}>{todo.text}</span>
