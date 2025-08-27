@@ -30,6 +30,21 @@ const App = () => {
 
   const onDelete = (targetId) => {
     setGoals(prev => prev.filter(goal => goal.id !== targetId));
+
+    // targetId에 해당하는 객체를 배열안에서 탐색한 후 제거
+    /*const copyGoals = [...goals];
+    let index = -1;
+    for (let i = 0; i < copyGoals.length; i++) {
+      if (copyGoals[i].id === targetId) {
+        index = i;
+        break;
+      }
+    }
+
+    if (index !== -1) {
+      copyGoals.splice(index, 1);
+      setGoals(copyGoals);
+    }*/
   };
 
   return (
