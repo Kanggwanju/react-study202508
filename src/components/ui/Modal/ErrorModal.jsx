@@ -5,6 +5,7 @@ import styles from './ErrorModal.module.css';
 
 // portal을 사용하기 위한 import
 import ReactDOM from 'react-dom';
+import Portal from './Portal.jsx';
 
 const BackDrop = ({ onClose }) => {
   return <div className={styles.backdrop} onClick={onClose}></div>
@@ -29,19 +30,13 @@ const ModalOverlay = ({ title, message, onClose }) => {
 const ErrorModal = ({ title, message, onClose }) => {
   return (
     <>
-      {
-        ReactDOM.createPortal(
-          <BackDrop onClose={onClose}/>,
-          document.getElementById('backdrop-root')
-        )
-      }
+      <Portal destId='backdrop-root'>
+        <BackDrop onClose={onClose}/>
+      </Portal>
 
-      {
-        ReactDOM.createPortal(
-          <ModalOverlay title={title} message={message} onClose={onClose} />,
-          document.getElementById('modal-overlay-root')
-        )
-      }
+      <Portal destId='modal-overlay-root'>
+        <ModalOverlay title={title} message={message} onClose={onClose} />
+      </Portal>
     </>
   );
 };
