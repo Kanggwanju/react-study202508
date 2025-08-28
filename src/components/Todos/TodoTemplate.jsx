@@ -32,12 +32,22 @@ const TodoTemplate = () => {
   
   // 할 일 체크 함수
   const onCheck = (targetId) => {
+    // id로 done의 값을 변경할 객체를 탐색한 후 논리값 반전
     setTodos(prev =>
       prev.map(todo =>
         todo.id === targetId ? { ...todo, isChecked: !todo.isChecked } : todo
       )
     );
 
+    // find
+    /*const copyTodos = [...todos];
+    const targetTodo = copyTodos.find(todo => todo.id === id);
+
+    targetTodo.done = !targetTodo.done;
+
+    setTodos(copyTodos);*/
+
+    // 반복문
     /*const copyTodos = [...todos];
     let index = -1;
     for (let i = 0; i < copyTodos.length; i++) {
