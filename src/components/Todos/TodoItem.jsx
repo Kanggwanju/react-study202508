@@ -17,12 +17,10 @@ const TodoItem = ({ todo, onDelete, onCheck }) => {
 
   return (
     <li className={itemStyle}>
-      <div className={`${checkCircle} ${todo.isChecked === true ? styles.active : ''}`} onClick={checkClickHandler}>
-        {
-          todo.isChecked === true ? <MdDone /> : ''
-        }
+      <div className={`${checkCircle} ${todo.isChecked ? styles.active : ''}`} onClick={checkClickHandler}>
+        { todo.isChecked ? <MdDone /> : '' }
       </div>
-      <span className={`${text} ${todo.isChecked === true ? styles.finish : ''}`}>{todo.text}</span>
+      <span className={`${text} ${todo.isChecked ? styles.finish : ''}`}>{todo.text}</span>
       <div
         className={remove}
         onClick={deleteClickHandler}
