@@ -13,12 +13,6 @@ import ResultModal from './ResultModal.jsx';
 
 const TimerChallenge = ({ title, targetTime}) => {
 
-  // 타이머가 시작됐는지를 확인하는 상태값
-  const [timerStarted, setTimerStarted] = useState(false);
-
-  // 타이머가 만료되었는지 확인하는 상태값
-  const [timerExpired, setTimerExpired] = useState(false);
-
   /*
     timerId를 지역변수로 두자니 리렌더링시에 사라져버림
     전역변수로 두자니 4개의 컴포넌트가 공유해버리는 문제
@@ -30,21 +24,25 @@ const TimerChallenge = ({ title, targetTime}) => {
   // 모달 태그를 제어하기 위한 ref
   const dialogRef = useRef();
 
+  // 남은 시간을 관리하는 상태변수
+  const [timeRemaining, setTimeRemaining] = useState(targetTime * 1000);
+
+  // start stop 활성화 조건
+  const timerIsActive = timeRemaining > 0 && timeRemaining < targetTime * 1000;
+
+  // 게임 패배 조건
+  if (timeRemaining <= 0) {
+    clearInterval(timerId.current);
+    dialogRef.current.showModal();
+  }
+
+
+
   // 타이머를 시작하는 이벤트
   const handleStart = e => {
-    console.log('타이머가 시작됨!');
-    setTimerStarted(true);
-
     // 실제 정해진 시간만큼 타이머를 가동
-    timerId.current = setTimeout(() => {
-      console.log(targetTime + 's 타이머 만료!');
-      setTimerExpired(true);
-
-      // document.querySelector('dialog').showModal();
-
-      console.log(dialogRef);
-      dialogRef.current.showModal();
-
+    timerId.current = setInterval(() => {
+      setTimeRemaining((prevTime) => prevTime - 10);
     }, targetTime * 1000);
 
     /*
@@ -60,27 +58,29 @@ const TimerChallenge = ({ title, targetTime}) => {
 
   // 타이머를 중단하는 함수
   const handleStop = e => {
-    console.log('타이머가 중지됨! timerId - ', timerId);
-    clearTimeout(timerId.current);
-
+    console.log('타이머가 중지됨! timerId - ', timerId.current);
+    clearInterval(timerId.current);
     dialogRef.current.showModal();
   };
 
   return (
     <>
-      <ResultModal ref={dialogRef} result='lost' targetTime={targetTime}/>
+      <ResultModal
+        ref={dialogRef}
+        result={timeRemaining <= 0 ? 'lost' : 'won'}
+        targetTime={targetTime}/>
       <section className='challenge'>
         <h2>{title}</h2>
         <p className='challenge-time'>
           {targetTime} second{targetTime > 1 ? 's' : ''}
         </p>
         <p>
-          <button onClick={timerStarted ? handleStop : handleStart}>
-            {timerStarted ? 'Stop' : 'Start'}
+          <button onClick={timerIsActive ? handleStop : handleStart}>
+            {timerIsActive ? 'Stop' : 'Start'} Challenge
           </button>
         </p>
         <p>
-          {timerStarted ? 'Time is running...' : 'Timer inactive'}
+          {timerIsActive ? 'Time is running...' : 'Timer inactive'}
         </p>
       </section>
     </>
