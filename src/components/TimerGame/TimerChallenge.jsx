@@ -1,4 +1,5 @@
 import React, {useRef, useState} from 'react';
+import ResultModal from './ResultModal.jsx';
 
 /*
   timer를 전역변수로 설정시 5초 start -> 10초 start -> 10초 stop -> 5초 stop
@@ -35,6 +36,9 @@ const TimerChallenge = ({ title, targetTime}) => {
     timerId.current = setTimeout(() => {
       console.log(targetTime + 's 타이머 만료!');
       setTimerExpired(true);
+
+      document.querySelector('dialog').showModal();
+
     }, targetTime * 1000);
 
     /*
@@ -47,29 +51,31 @@ const TimerChallenge = ({ title, targetTime}) => {
       따라서 제대로 clear를 수행하지 못함
     */
   };
-  // 타이머를 중단하는 함수
 
+  // 타이머를 중단하는 함수
   const handleStop = e => {
     console.log('타이머가 중지됨! timerId - ', timerId);
     clearTimeout(timerId.current);
   };
 
   return (
-    <section className='challenge'>
-      <h2>{title}</h2>
-      {timerExpired && <p>You Lost!</p>}
-      <p className='challenge-time'>
-        {targetTime} second{targetTime > 1 ? 's' : ''}
-      </p>
-      <p>
-        <button onClick={timerStarted ? handleStop : handleStart}>
-          {timerStarted ? 'Stop' : 'Start'}
-        </button>
-      </p>
-      <p>
-        {timerStarted ? 'Time is running...' : 'Timer inactive'}
-      </p>
-    </section>
+    <>
+      <ResultModal result='lost' targetTime={targetTime}/>
+      <section className='challenge'>
+        <h2>{title}</h2>
+        <p className='challenge-time'>
+          {targetTime} second{targetTime > 1 ? 's' : ''}
+        </p>
+        <p>
+          <button onClick={timerStarted ? handleStop : handleStart}>
+            {timerStarted ? 'Stop' : 'Start'}
+          </button>
+        </p>
+        <p>
+          {timerStarted ? 'Time is running...' : 'Timer inactive'}
+        </p>
+      </section>
+    </>
   );
 };
 
