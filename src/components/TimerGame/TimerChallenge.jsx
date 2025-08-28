@@ -27,6 +27,9 @@ const TimerChallenge = ({ title, targetTime}) => {
   // 리렌더링이 되어도 값을 컴포넌트별로 유지하는 방법 useRef
   const timerId = useRef();
 
+  // 모달 태그를 제어하기 위한 ref
+  const dialogRef = useRef();
+
   // 타이머를 시작하는 이벤트
   const handleStart = e => {
     console.log('타이머가 시작됨!');
@@ -37,7 +40,10 @@ const TimerChallenge = ({ title, targetTime}) => {
       console.log(targetTime + 's 타이머 만료!');
       setTimerExpired(true);
 
-      document.querySelector('dialog').showModal();
+      // document.querySelector('dialog').showModal();
+
+      console.log(dialogRef);
+      dialogRef.current.showModal();
 
     }, targetTime * 1000);
 
@@ -56,11 +62,13 @@ const TimerChallenge = ({ title, targetTime}) => {
   const handleStop = e => {
     console.log('타이머가 중지됨! timerId - ', timerId);
     clearTimeout(timerId.current);
+
+    dialogRef.current.showModal();
   };
 
   return (
     <>
-      <ResultModal result='lost' targetTime={targetTime}/>
+      <ResultModal ref={dialogRef} result='lost' targetTime={targetTime}/>
       <section className='challenge'>
         <h2>{title}</h2>
         <p className='challenge-time'>
